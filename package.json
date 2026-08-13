@@ -1,0 +1,24 @@
+{
+  "name": "dsh-side-panel",
+  "version": "1.0.0",
+  "description": "Right-side developer panel for DeepSeek Harness: files, session history, and git version control",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XYZ1024-alt/dsh-side-panel.git"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}
