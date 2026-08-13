@@ -11,3 +11,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Package artifacts
+*.tgz

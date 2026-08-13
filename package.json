@@ -2,20 +2,44 @@
   "name": "dsh-side-panel",
   "version": "1.0.0",
   "description": "Right-side developer panel for DeepSeek Harness: files, session history, and git version control",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "side-panel",
+    "developer-tools"
+  ],
   "license": "MIT",
-  "private": true,
   "type": "module",
   "main": "lib/index.js",
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/XYZ1024-alt/dsh-side-panel.git"
   },
+  "bugs": {
+    "url": "https://github.com/XYZ1024-alt/dsh-side-panel/issues"
+  },
+  "homepage": "https://github.com/XYZ1024-alt/dsh-side-panel#readme",
   "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
       "immediately": true

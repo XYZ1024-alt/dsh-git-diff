@@ -13,40 +13,61 @@ A right-side developer panel for the [DeepSeek Harness](https://github.com/deeps
 
 ## Installation
 
-The plugin is a small dual-face package: a Node half (filesystem + git primitives) and a browser half (the UI), discovered via the package's `dsh.client` declaration.
+The plugin is distributed as a DeepSeek Harness bundle. Its bundle patch
+registers both the Node half (filesystem + git primitives) and the browser half
+(the UI), so no files or patch rows need to be copied manually.
 
-`$DSH_HOME` is your harness home (defaults to `~/.dsh` on macOS/Linux and `C:\Users\<you>\.dsh` on Windows).
+### Install from GitHub
 
-### Method 1 — copy into the profile (recommended)
-
-1. Copy the whole `dsh-side-panel/` folder into the profile's hoisted `node_modules`:
-
-   - **macOS / Linux**
-     ```bash
-     cp -R ./dsh-side-panel "$DSH_HOME/profiles/node_modules/dsh-side-panel"
-     ```
-   - **Windows (PowerShell)**
-     ```powershell
-     Copy-Item -Recurse .\dsh-side-panel "$env:DSH_HOME\profiles\node_modules\dsh-side-panel"
-     ```
-
-2. Register the row in the web profile's patch layer, `$DSH_HOME/profiles/web/cordis.patch.yml`:
-
-   ```yaml
-   - insert:
-       - id: dsh-side-panel
-         name: dsh-side-panel
-   ```
-
-   If the file already has an `- insert:` block, add the two `id` / `name` lines under it instead of adding a second block.
-
-3. Restart `dsh web` and refresh the page. The panel appears on the right edge.
-
-### Method 2 — clone and copy
+Install it directly into the `web` profile:
 
 ```bash
-git clone git@github.com:XYZ1024-alt/dsh-side-panel.git
-# then follow Method 1 steps 1–3 using the cloned folder
+dsh plugin --profile web add github:XYZ1024-alt/dsh-side-panel
+```
+
+This repository commits its ready-to-run JavaScript, so installation does not
+run a build script and does not require pnpm build authorization.
+
+For a reproducible installation, pin a trusted commit:
+
+```bash
+dsh plugin --profile web add github:XYZ1024-alt/dsh-side-panel#<commit-sha>
+```
+
+Restart `dsh web` after installation and refresh the page. The panel appears on
+the right edge.
+
+### Install from npm
+
+After the package is published to npm:
+
+```bash
+dsh plugin --profile web add dsh-side-panel
+```
+
+### Install a local checkout
+
+From the parent directory of this repository:
+
+```bash
+dsh plugin --profile web add ./dsh-side-panel
+```
+
+### Verify
+
+Inspect the composed profile before starting the web UI:
+
+```bash
+dsh --profile web --dump-config
+```
+
+The output should contain a `# == dsh-side-panel` bundle layer and the
+`dsh-side-panel` plugin row.
+
+### Uninstall
+
+```bash
+dsh plugin --profile web remove dsh-side-panel
 ```
 
 ## Usage
