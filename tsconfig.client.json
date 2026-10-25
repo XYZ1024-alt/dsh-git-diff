@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": ["src/contract.ts", "src/routes.ts", "src/client"]
+}

@@ -1,3 +1,5 @@
+# dsh-git-diff bundle patch: one row whose package serves both the Host
+# routes (lib/index.js) and the browser tab (lib/client.js).
 - insert:
-    - id: dsh-side-panel
-      name: dsh-side-panel
+    - id: dsh-git-diff
+      name: dsh-git-diff

@@ -1,13 +1,14 @@
 {
-  "name": "dsh-side-panel",
-  "version": "1.0.0",
-  "description": "Right-side developer panel for DeepSeek Harness: files, session history, and git version control",
+  "name": "dsh-git-diff",
+  "version": "2.0.0",
+  "description": "Git changes and per-file diffs as a right-Sidebar tab for the DeepSeek Harness web UI",
   "keywords": [
     "deepseek-harness",
     "dsh",
     "dsh-plugin",
-    "side-panel",
-    "developer-tools"
+    "git",
+    "diff",
+    "sidebar"
   ],
   "license": "MIT",
   "type": "module",
@@ -30,19 +31,65 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XYZ1024-alt/dsh-side-panel.git"
+    "url": "git+https://github.com/XYZ1024-alt/dsh-git-diff.git"
   },
   "bugs": {
-    "url": "https://github.com/XYZ1024-alt/dsh-side-panel/issues"
+    "url": "https://github.com/XYZ1024-alt/dsh-git-diff/issues"
   },
-  "homepage": "https://github.com/XYZ1024-alt/dsh-side-panel#readme",
+  "homepage": "https://github.com/XYZ1024-alt/dsh-git-diff#readme",
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.1-rc.2 <0.3.0-0"
+  },
   "dsh": {
+    "manifestVersion": 1,
     "bundle": {
       "patch": "./cordis.patch.yml"
     },
     "client": {
       "platform": "web",
-      "immediately": true
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
     }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.host.json && tsc --noEmit -p tsconfig.client.json",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "check": "pnpm typecheck && pnpm lint && pnpm build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.2",
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-api-session-controller": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-locale": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-shortcuts": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-store": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-dockkit": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-layout": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-primitives": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-session": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-sidebar-right": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-fs": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-session": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-session-persistence": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-subprocess": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-util-workspace-path": "0.2.1-rc.2",
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "diff": "9.0.0",
+    "esbuild": "0.28.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swr": "2.5.1",
+    "typescript": "7.0.2",
+    "zod": "4.4.3"
   }
 }
